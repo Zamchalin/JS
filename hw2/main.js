@@ -62,8 +62,9 @@ console.log(books.hasBook("Евгений Онегин"));
 
 // При добавлении отзыва, он должен отображаться на странице под предыдущими отзывами, а не заменять их.
 // const button__review = document.getElementById("button__review");
-
+let counter = 0;
 document.getElementById("submitReview").addEventListener("click", function () {
+  counter++;
   addReview();
 });
 
@@ -77,7 +78,8 @@ function addReview() {
   }
 
   const reviewElement = document.createElement("p");
-  reviewElement.textContent = reviewText;
+  reviewElement.textContent = `id:${counter}
+  Отзыв:${reviewText}`;
 
   reviewContainer.appendChild(reviewElement);
 
