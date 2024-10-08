@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Расписание занятий</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .card {
+        margin: 20px;
+      }
+      .full {
+        background-color: #f8d7da;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center my-4">Расписание занятий</h1>
+      <div id="schedule" class="row"></div>
+    </div>
+
+    <script>
+      const classes = [
+        {
+          title: "Йога",
+          time: "09:00 - 10:00",
+          maxParticipants: 15,
+          currentParticipants: 10,
+        },
+        {
+          title: "Пилатес",
+          time: "10:30 - 11:30",
+          maxParticipants: 12,
+          currentParticipants: 12,
+        },
+        {
+          title: "Кроссфит",
+          time: "12:00 - 13:00",
+          maxParticipants: 20,
+          currentParticipants: 5,
+        },
+      ];
+
+      function renderClasses() {
+        const schedule = document.getElementById("schedule");
+        schedule.innerHTML = "";
+
+        classes.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "col-md-4";
+          card.innerHTML = `
+                <div class="card ${
+                  item.currentParticipants >= item.maxParticipants ? "full" : ""
+                }">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.title}</h5>
+                        <p class="card-text">Время: ${item.time}</p>
+                        <p class="card-text">Максимальное количество участников: ${
+                          item.maxParticipants
+                        }</p>
+                        <p class="card-text">Записанные участники: ${
+                          item.currentParticipants
+                        }</p>
+                        <button class="btn btn-primary ${
+                          item.currentParticipants >= item.maxParticipants
+                            ? "disabled"
+                            : ""
+                        }" onclick="register(${index})">
+                            Записаться
+                        </button>
+                        <button class="btn btn-danger ${
+                          item.currentParticipants === 0 ? "disabled" : ""
+                        }" onclick="cancelRegistration(${index})">
+                            Отменить запись
+                        </button>
+                    </div>
+                </div>
+            `;
+          schedule.appendChild(card);
+        });
+      }
+
+      function register(index) {
+        if (
+          classes[index].currentParticipants < classes[index].maxParticipants
+        ) {
+          classes[index].currentParticipants++;
+          renderClasses();
+        }
+      }
+
+      function cancelRegistration(index) {
+        if (classes[index].currentParticipants > 0) {
+          classes[index].currentParticipants--;
+          renderClasses();
+        }
+      }
+
+      renderClasses();
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
