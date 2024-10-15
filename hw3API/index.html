@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Фото дня от Unsplash</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+      .photo-info {
+        margin: 10px 0;
+      }
+      .likes {
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Фото дня от Unsplash</h1>
+    <img id="image" src="" alt="Случайное фото" />
+    <div class="photo-info">
+      <p id="photographer">Фотограф:</p>
+    </div>
+    <div class="likes">
+      <button id="likeButton">Лайк</button>
+      <span id="likeCount">0</span> Лайков
+    </div>
+    <h2>История просмотров</h2>
+    <div id="history"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
